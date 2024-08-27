@@ -14,11 +14,11 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 
+// Serve static files from the frontend build
+app.use(express.static(path.join(__dirname, '../dist')));
 // Routes
 app.use('/api', gameRoutes);
 
-// Serve static files from the frontend build
-app.use(express.static(path.join(__dirname, '../dist')));
 
 // Fallback for all other routes
 app.get('*', (req, res) => {

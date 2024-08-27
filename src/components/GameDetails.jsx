@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './../../src/Game.css'
 import axios from 'axios';
-import GameList from './GameList';
+import {BackendUrl} from './../utils/ApiEnd';
 
 const GameDetails = ({ games }) => {
   const { id } = useParams();
@@ -11,7 +11,7 @@ const GameDetails = ({ games }) => {
   const [game, setGames] = useState([]);
 
   useEffect(() => {
-    axios.get(`/api/games/${id}`)
+    axios.get(`${BackendUrl}/api/games/${id}`)
       .then(response => setGames(response.data))
       .catch(error => console.error(error));
   }, [id]);

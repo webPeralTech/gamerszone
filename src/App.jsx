@@ -9,12 +9,13 @@ import Footer from './components/Footer';
 import GameAdmin from './components/GameAdmin';
 import axios from 'axios';
 import PlayGame from './components/PlayGame';
+import {BackendUrl} from '././utils/ApiEnd';
 
 const App = () => {
   const [games, setGames] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/games')
+    axios.get(`${BackendUrl}/api/games`)
       .then(response => setGames(response.data))
       .catch(error => console.error(error));
   }, []);

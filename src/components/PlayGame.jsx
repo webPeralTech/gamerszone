@@ -2,6 +2,7 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { BackendUrl } from '../utils/ApiEnd';
 
 const PlayGame = ({ games }) => {
   const { id } = useParams();
@@ -9,7 +10,7 @@ const PlayGame = ({ games }) => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    axios.get(`/api/games/${id}`)
+    axios.get(`${BackendUrl}/api/games/${id}`)
       .then(response => setGame(response.data))
       .catch(error => console.error(error));
   }, [id]);

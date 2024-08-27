@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
 import toast, { Toaster } from 'react-hot-toast';
+import { BackendUrl } from '../utils/ApiEnd';
 
 const GameAdmin = () => {
   const [games, setGames] = useState([]);
@@ -51,7 +52,7 @@ const GameAdmin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      axios.post('/api/games', newGame)
+      axios.post(`${BackendUrl}/api/games`, newGame)
         .then(response => {
           setGames([...games, response.data]);
           toast.success('Game added successfully');
