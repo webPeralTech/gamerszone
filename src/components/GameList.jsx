@@ -23,7 +23,7 @@ const GameList = ({ games }) => {
             <div key={game._id} className="col-6 col-sm-4 col-lg-3 col-xl-2 p-2">
               <div className="gameCard" onClick={() => navigate(`/game/${game._id}`)}>
                 <a >
-                  <img src={game.image} alt={`Gamerz Area - ${game.title}`} />
+                  <img src={game.image} alt={`Gamers Zone - ${game.title}`} />
                   <div className="databg"></div>
                   <p className="text-center m-0 fs-16 king">{game.title}</p>
                 </a>

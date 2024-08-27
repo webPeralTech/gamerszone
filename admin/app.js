@@ -3,6 +3,7 @@ const connectDB = require('./config/db');
 const gameRoutes = require('./routes/game.routes');
 const cors = require('cors');
 require('dotenv').config();
+const path = require('path');
 
 const app = express();
 
@@ -15,6 +16,14 @@ app.use(express.json());
 
 // Routes
 app.use('/api', gameRoutes);
+
+// Serve static files from the frontend build
+app.use(express.static(path.join(__dirname, '../dist')));
+
+// Fallback for all other routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../dist', 'index.html'));
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

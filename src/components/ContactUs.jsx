@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 function Contact() {
   useEffect(() => {
-    document.title = "Gamerz Area | Contact Us"
+    document.title = "Gamers Zone | Contact Us"
   }, [])
   return (
     <>
@@ -17,8 +17,8 @@ function Contact() {
             </div>
             <div className="mt-4">
               <h4 className="descHeading"> Copy Right Issue </h4>
-              <p> At Gamerz Area, we are committed to respecting intellectual property rights and have made efforts to conform with them on our platform. Some of these games were developed by us while others are licensed from known copyright holders. In some cases, there is lack of copyright information due to general internet use and thus we make sure that they comply with certain prerequisites.</p>
-              <p> No change is made in the source code of the games thereby preserving credits, brand names and website links unaltered.If you believe that your copyright or other IPR has been violated on Gamerz Area’ sites, please contact contact@gamerzarea.com with:</p>
+              <p> At Gamers Zone, we are committed to respecting intellectual property rights and have made efforts to conform with them on our platform. Some of these games were developed by us while others are licensed from known copyright holders. In some cases, there is lack of copyright information due to general internet use and thus we make sure that they comply with certain prerequisites.</p>
+              <p> No change is made in the source code of the games thereby preserving credits, brand names and website links unaltered.If you believe that your copyright or other IPR has been violated on Gamers Zone’ sites, please contact contact@gamerzarea.com with:</p>
               <ul>
                 <li>Either your electronic or physical signature or that of your authorized agent.</li>
                 <li>An explanation of the infringed IP Right and the infringing activity.</li>

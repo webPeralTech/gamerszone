@@ -29,10 +29,10 @@ const GameDetails = ({ games }) => {
       <div className="bgContent">
         <div className="main-container py-4">
           <div className="common-game-bgn-container" style={{ width: "100%", height: "400px", minHeight: "400px", height: "auto" }}>
-            <img className="common-game-bg" src={game.image} alt={"Gamerz Area - " + game?.title} />
+            <img className="common-game-bg" src={game.image} alt={"Gamers Zone - " + game?.title} />
             <div className="common-game-bg-overlay-banner">
               <div className='center-content'>
-                <img src={game.image} alt={"Gamerz Area - " + game?.title} />
+                <img src={game.image} alt={"Gamers Zone - " + game?.title} />
                 <a onClick={handlePlayClick}>
                   <button className='gamebutton mt-3'>PLAY</button>
                 </a>
@@ -54,7 +54,7 @@ const GameDetails = ({ games }) => {
               <div key={game._id} className="col-6 col-sm-4 col-lg-3 col-xl-2 p-2">
                 <div className="gameCard" onClick={() => navigate(`/game/${game._id}`)}>
                   <a >
-                    <img src={game.image} alt={`Gamerz Area - ${game.title}`} />
+                    <img src={game.image} alt={`Gamers Zone - ${game.title}`} />
                     <div className="databg"></div>
                     <p className="text-center m-0 fs-16 king">{game.title}</p>
                   </a>

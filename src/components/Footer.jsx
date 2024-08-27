@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './../../src/Footer.css';
 import axios from 'axios';
+import logo from "./../assets/games_zone.png"
 
 function Footer() {
   // const games = gameData?.slice(0, 10)
@@ -17,7 +18,7 @@ function Footer() {
       <div className='main-container h-100'>
         <div className='row m-0 h-100 d-flex py-3'>
           <div className='col-12 col-md-2'>
-            <img src="/src/assets/games_zone.png" alt="Gamerz Area" width={'200px'} height={'200px'} style={{ maxWidth: '500px' }} />
+            <img src={logo} alt="Gamers Zone" width={'200px'} height={'200px'} style={{ maxWidth: '500px' }} />
           </div>
 
           <div className='col-10 d-flex flex-wrap gap-5 footerLinks '>
