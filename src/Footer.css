@@ -1,0 +1,37 @@
+.footer {
+    width: 100%;
+    background-color: rgb(37, 37, 37);
+    color: white;
+    padding: 5px;
+}
+
+.menuLinks a {
+    display: block;
+    text-decoration: none;
+    color: rgb(140, 140, 241);
+}
+
+.footerLinks {
+    /* justify-content: end; */
+    justify-content: center;
+}
+
+
+@media only screen and (max-width: 767px) {
+    .footerLinks {
+        justify-content: start;
+        margin-top: 30px;
+    }
+}
+
+.main-container{
+    width: 70%;
+    margin: 0 auto !important;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .main-container{
+        width: 100%;
+    }
+}

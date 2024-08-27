@@ -1,0 +1,46 @@
+.header {
+    background-color: rgb(37, 37, 37);
+    color: white;
+    padding: 5px;
+    height: 70px;
+    box-shadow: 0px -10px 20px 0px white;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%
+}
+
+.menu {
+    margin-bottom: 0;
+}
+
+.menu a {
+    display: inline;
+    padding: 7px 12px;
+    margin: 0 5px;
+    color: white;
+    text-decoration: none;
+    transition: 0.5s;
+    border-radius: 5px;
+}
+
+.menu a:hover {
+    background: linear-gradient(180deg, rgb(46 210 214), rgb(228 27 238));
+    color: white;
+}
+
+.menu a.active {
+    background: linear-gradient(180deg, rgb(46 210 214), rgb(228 27 238));
+    color: white;
+}
+
+.main-container {
+    width: 70%;
+    margin: 0 auto !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .main-container {
+        width: 100%;
+    }
+}
