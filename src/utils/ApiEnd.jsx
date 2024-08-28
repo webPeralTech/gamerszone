@@ -1,1 +1,1 @@
-export const BackendUrl = "https://gamerszone.onrender.com"
+export const BackendUrl = "http://localhost:8080";
