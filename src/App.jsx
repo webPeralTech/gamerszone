@@ -32,7 +32,7 @@ const App = () => {
           <Route path="/contactus" element={<Contact />} />
           <Route path="/admin" element={<GameAdmin />} />
         </Routes>
-        <Footer />
+        <Footer games={games}/>
       </Router>
     </>
   );
