@@ -15,14 +15,14 @@ app.use(cors());
 app.use(express.json());
 
 // Serve static files from the frontend build
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, '../dist')));
 // Routes
 app.use('/api', gameRoutes);
 
 
 // Fallback for all other routes
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 
 const PORT = process.env.PORT || 5000;
