@@ -13,7 +13,6 @@ import {BackendUrl} from '././utils/ApiEnd';
 
 const App = () => {
   const [games, setGames] = useState([]);
-
   useEffect(() => {
     axios.get(`${BackendUrl}/api/games`)
       .then(response => setGames(response.data))

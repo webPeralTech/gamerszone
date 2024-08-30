@@ -4,15 +4,17 @@ import axios from 'axios';
 import logo from "./../assets/games_zone.png"
 import { BackendUrl } from '../utils/ApiEnd';
 
-function Footer({gameData}) {
+function Footer({ games }) {
   // const games = gameData?.slice(0, 10)
-  // const [gameData, setGameData] = useState([]);
+  const [gameData, setGameData] = useState([]);
+  // console.log("gameData: ", games);
+  // console.log("gameData: ", gameData);
 
-  // React.useEffect(() => {
-  //   axios.get(`${BackendUrl}/api/games`)
-  //     .then(response => setGameData(response.data))
-  //     .catch(error => console.error(error));
-  // }, []);
+  React.useEffect(() => {
+    if (games) {
+      setGameData(games)
+    }
+  }, [games]);
 
   return (
     <div className='footer'>

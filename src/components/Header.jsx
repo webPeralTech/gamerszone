@@ -16,14 +16,14 @@ const Header = () => {
             </button>
             <div className="d-flex menu justify-content-end collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav mb-2 mb-lg-0">
-                <li className="nav-item cursor-pointer">
-                  <a className="nav-link active " aria-current="page" onClick={() => navigate("/")}>Home</a>
+                <li className="nav-item">
+                  <a className="nav-link active" style={{cursor : "pointer"}} aria-current="page" onClick={() => navigate("/")}>Home</a>
                 </li>
-                <li className="nav-item cursor-pointer">
+                <li className="nav-item" style={{cursor : "pointer"}}>
                   <a className="nav-link" aria-current="page" onClick={() => navigate("/aboutus")}
                   >About Us</a>
                 </li>
-                <li className="nav-item cursor-pointer">
+                <li className="nav-item" style={{cursor : "pointer"}}>
                   <a className="nav-link" aria-current="page"  onClick={() => navigate("/contactus")}>Contact Us</a>
                 </li>
               </ul>
