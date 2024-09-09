@@ -3,13 +3,15 @@ import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
 import toast, { Toaster } from 'react-hot-toast';
 import { BackendUrl } from '../utils/ApiEnd';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const GameAdmin = () => {
   const [games, setGames] = useState([]);
   const [newGame, setNewGame] = useState({
     title: '',
     image: '',
-    descriptions: [''], // Initialize with one empty description
+    descriptions: '', // Initialize with one empty description
     link: '',
   });
   const [errors, setErrors] = useState({});
@@ -25,9 +27,9 @@ const GameAdmin = () => {
     if (!newGame.title) newErrors.title = 'Title is required';
     if (!newGame.image) newErrors.image = 'Image URL is required';
     if (!newGame.link) newErrors.link = 'Game Link is required';
-    newGame.descriptions.forEach((desc, index) => {
-      if (!desc) newErrors[`description${index}`] = 'Description cannot be empty';
-    });
+    // newGame.descriptions.forEach((desc, index) => {
+    //   if (!desc) newErrors[`description${index}`] = 'Description cannot be empty';
+    // });
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -56,7 +58,7 @@ const GameAdmin = () => {
         .then(response => {
           setGames([...games, response.data]);
           toast.success('Game added successfully');
-          setNewGame({ title: '', image: '', descriptions: [''], link: '' }); // Reset form
+          setNewGame({ title: '', image: '', descriptions: '', link: '' }); // Reset form
           setErrors({});
         })
         .catch(error => {
@@ -108,7 +110,7 @@ const GameAdmin = () => {
                   </Form.Group>
 
                   {/* Dynamic description fields */}
-                  {newGame.descriptions.map((description, index) => (
+                  {/* {newGame.descriptions.map((description, index) => (
                     <Form.Group key={index} className="mb-3 d-flex">
                       <Form.Control
                         type="text"
@@ -132,6 +134,7 @@ const GameAdmin = () => {
                       </Form.Control.Feedback>
                     </Form.Group>
                   ))}
+                  
                   <Button
                     type="button"
                     variant="secondary"
@@ -139,7 +142,25 @@ const GameAdmin = () => {
                     onClick={addDescriptionField}
                   >
                     Add Description
-                  </Button>
+                  </Button> */}
+
+                  <Form.Group className="mb-3">
+                    <label className="text-white">Description of game</label>
+                    <CKEditor
+                      editor={ClassicEditor}
+                      data={newGame?.descriptions}
+                      // config={{
+                      //   ckfinder: {
+                      //     uploadUrl: "", //Enter your upload url
+                      //   },
+                      // }}
+
+                      onChange={(event, editor) => {
+                        const data = editor.getData();
+                        setNewGame({ ...newGame, descriptions: data })
+                      }}
+                    />
+                  </Form.Group>
 
                   <Form.Group className="mb-3">
                     <Form.Label htmlFor="link" className="text-white">Game Link</Form.Label>
@@ -158,15 +179,15 @@ const GameAdmin = () => {
 
                   <Button type="submit" variant="primary">Add Game</Button>
                 </Form>
-                <Toaster 
-                position="top-center"
-                containerStyle={{
-                  top: 20,
-                  left: 20,
-                  bottom: 80,
-                  right: 20,
-                }} // Change this position to suit your needs
-                reverseOrder={false}/>
+                <Toaster
+                  position="top-center"
+                  containerStyle={{
+                    top: 20,
+                    left: 20,
+                    bottom: 80,
+                    right: 20,
+                  }} // Change this position to suit your needs
+                  reverseOrder={false} />
               </div>
             </div>
           </div>

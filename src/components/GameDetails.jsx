@@ -40,9 +40,10 @@ const GameDetails = ({ games }) => {
             </div>
           </div>
           <div className="fs-18 text-white mt-5 description mb-5">
-            {game?.descriptions?.map((desc, index) => (
+            {/* {game?.descriptions?.map((desc, index) => (
               <p key={index} className="m-0 mb-3">{desc}</p>
-            ))}
+            ))} */}
+            <div dangerouslySetInnerHTML={{ __html: game?.descriptions }}></div>
           </div>
         </div>
       </div>
