@@ -21,7 +21,7 @@ function Footer({ games }) {
       <div className='main-container h-100'>
         <div className='row m-0 h-100 d-flex py-3'>
           <div className='col-12 col-md-2'>
-            <img src={logo} alt="Gamers Zone" width={'200px'} height={'200px'} style={{ maxWidth: '500px' }} />
+            <img src={logo} alt="Game of joys" width={'200px'} height={'200px'} style={{ maxWidth: '500px' }} />
           </div>
 
           <div className='col-10 d-flex flex-wrap gap-5 footerLinks '>

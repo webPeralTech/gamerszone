@@ -10,7 +10,7 @@
 //       <div className="">
 //         <nav className="header navbar navbar-expand-lg px-5 sticky-top">
 //           <div className="container">
-//             <a className="navbar-brand text-white mt-3" onClick={() => navigate("/")}> <img src={logo} alt="Gamers Zone" width={'150px'} height={'150px'} /></a>
+//             <a className="navbar-brand text-white mt-3" onClick={() => navigate("/")}> <img src={logo} alt="Game of joys" width={'150px'} height={'150px'} /></a>
 //             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 //               <span className="navbar-toggler-icon"></span>
 //             </button>
@@ -73,7 +73,7 @@ function Header(props) {
               <a href="/">
                 <div className="d-flex">
                   <img src={logo} alt="" height={80} />
-                  <h6 className="text-center d-flex align-items-center text-white fs-4 mb-3">Gamers Zone</h6>
+                  <h6 className="text-center d-flex align-items-center text-white fs-4 mb-3">Game Of Joys</h6>
                 </div>
 
               </a>

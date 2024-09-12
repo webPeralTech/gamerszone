@@ -9,7 +9,7 @@ const Home = ({ games }) => {
     <main>
       <Carousel />
       <div>
-        <h1 className='text-center p-2 text-success'>Our Trending Games</h1>
+        {/* <h1 className='text-center p-2 text-success'>Our Trending Games</h1> */}
         <GameList games={games} />
       </div>
     </main>

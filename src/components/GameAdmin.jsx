@@ -34,27 +34,17 @@ const GameAdmin = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleDescriptionChange = (index, value) => {
-    const updatedDescriptions = [...newGame.descriptions];
-    updatedDescriptions[index] = value;
-    setNewGame({ ...newGame, descriptions: updatedDescriptions });
-  };
-
-  const addDescriptionField = () => {
-    setNewGame({ ...newGame, descriptions: [...newGame.descriptions, ''] });
-  };
-
-  const removeDescriptionField = (index) => {
-    if (newGame.descriptions.length > 1) { // Ensure at least one description field remains
-      const updatedDescriptions = newGame.descriptions.filter((_, i) => i !== index);
-      setNewGame({ ...newGame, descriptions: updatedDescriptions });
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      axios.post(`${BackendUrl}/api/games`, newGame)
+      const formData = new FormData();
+
+      // Append each field to the FormData object
+      formData.append('title', newGame?.title);
+      formData.append('image', newGame?.image); // Assuming `newGame.image` is a file
+      formData.append('descriptions', newGame?.descriptions);
+      formData.append('link', newGame?.link);
+      axios.post(`${BackendUrl}/api/games`, formData)
         .then(response => {
           setGames([...games, response.data]);
           toast.success('Game added successfully');
@@ -97,11 +87,11 @@ const GameAdmin = () => {
                   <Form.Group className="mb-3">
                     <Form.Label htmlFor="image" className="text-white">Image URL</Form.Label>
                     <Form.Control
-                      type="text"
+                      type="file"
                       id="image"
                       placeholder="Image URL"
-                      onChange={(e) => setNewGame({ ...newGame, image: e.target.value })}
-                      value={newGame.image}
+                      onChange={(e) => setNewGame({ ...newGame, image: e.target.files[0] })}
+                      // value={newGame.image}
                       isInvalid={!!errors.image}
                     />
                     <Form.Control.Feedback type="invalid">

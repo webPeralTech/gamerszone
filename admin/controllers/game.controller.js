@@ -12,13 +12,19 @@ exports.getGames = async (req, res) => {
 
 // Create a new game
 exports.createGame = async (req, res) => {
-  const { title, image, descriptions, link } = req.body;
-
   try {
+    const { title, descriptions, link } = req.body;
+    // Check if the file exists in the request
+    if (!req.file) {
+      return res.status(400).json({ message: 'Image is required' });
+    }
+    const image = req.file.path;
     const newGame = new Game({ title, image, descriptions, link });
+    console.log("newGame",newGame)
     await newGame.save();
     res.status(201).json(newGame);
   } catch (error) {
+    console.log("error", error)
     res.status(500).json({ message: 'Server Error' });
   }
 };
