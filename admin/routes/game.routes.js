@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/games', getGames);
 router.post('/games',upload.single('image'), createGame);
-router.put('/games/:id', updateGame);
+router.put('/games/:id', upload.single('image'), updateGame);
 router.delete('/games/:id', deleteGame);
 router.get('/games/:id', getGameById);
 module.exports = router;

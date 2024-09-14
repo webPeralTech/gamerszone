@@ -1,35 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Toast, Spinner } from 'react-bootstrap';
 import toast, { Toaster } from 'react-hot-toast';
 import { BackendUrl } from '../utils/ApiEnd';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import GameModel from './GameModal';
 
 const GameAdmin = () => {
+  const [isEdit, setIsEdit] = useState(false);
+  const [currentGameId, setCurrentGameId] = useState(null);
   const [games, setGames] = useState([]);
   const [newGame, setNewGame] = useState({
     title: '',
     image: '',
-    descriptions: '', // Initialize with one empty description
+    descriptions: '',
     link: '',
   });
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false); // Loading state
 
-  // useEffect(() => {
-  //   axios.get('/api/games')
-  //     .then(response => setGames(response.data))
-  //     .catch(error => console.error(error));
-  // }, []);
+  // Fetch all games
+  useEffect(() => {
+    setLoading(true); // Show loader when fetching data
+    axios.get(`${BackendUrl}/api/games`)
+      .then(response => {
+        setGames(response.data);
+        setLoading(false); // Hide loader once data is fetched
+      })
+      .catch(error => {
+        console.error(error);
+        setLoading(false); // Hide loader if error occurs
+      });
+  }, []);
 
   const validateForm = () => {
     const newErrors = {};
     if (!newGame.title) newErrors.title = 'Title is required';
     if (!newGame.image) newErrors.image = 'Image URL is required';
     if (!newGame.link) newErrors.link = 'Game Link is required';
-    // newGame.descriptions.forEach((desc, index) => {
-    //   if (!desc) newErrors[`description${index}`] = 'Description cannot be empty';
-    // });
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -37,6 +44,7 @@ const GameAdmin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
+      setLoading(true);
       const formData = new FormData();
 
       // Append each field to the FormData object
@@ -44,15 +52,41 @@ const GameAdmin = () => {
       formData.append('image', newGame?.image); // Assuming `newGame.image` is a file
       formData.append('descriptions', newGame?.descriptions);
       formData.append('link', newGame?.link);
-      axios.post(`${BackendUrl}/api/games`, formData)
+      // axios.post(`${BackendUrl}/api/games`, formData)
+      //   .then(response => {
+      //     setGames([...games, response.data]);
+      //     toast.success('Game added successfully');
+      //     setNewGame({ title: '', image: '', descriptions: '', link: '' }); // Reset form
+      //     setErrors({});
+      //   })
+      //   .catch(error => {
+      //     toast.error('Failed to add game');
+      //     console.error(error);
+      //   });
+      const apiCall = isEdit
+        ? axios.put(`${BackendUrl}/api/games/${currentGameId}`, formData)
+        : axios.post(`${BackendUrl}/api/games`, formData);
+
+      apiCall
         .then(response => {
-          setGames([...games, response.data]);
-          toast.success('Game added successfully');
-          setNewGame({ title: '', image: '', descriptions: '', link: '' }); // Reset form
-          setErrors({});
+          if (isEdit) {
+            setGames(games?.map(game => game._id === currentGameId ? response.data : game));
+            toast.success('Game updated successfully');
+            var gameModel = document.getElementById('model_close');
+            gameModel.click()
+            setLoading(false);
+          } else {
+            setGames([...games, response.data]);
+            toast.success('Game added successfully');
+            var gameModel = document.getElementById('model_close');
+            gameModel.click()
+            setLoading(false);
+          }
+          // resetForm();
         })
         .catch(error => {
-          toast.error('Failed to add game');
+          toast.error('Failed to submit the form');
+          setLoading(false);
           console.error(error);
         });
     } else {
@@ -60,13 +94,33 @@ const GameAdmin = () => {
     }
   };
 
+  const handleEdit = (game) => {
+    setNewGame({
+      title: game?.title,
+      image: game?.image,
+      descriptions: game?.descriptions,
+      link: game?.link
+    });
+    setCurrentGameId(game._id);
+    setIsEdit(true);
+    var gameModel = document.getElementById('model_close');
+    gameModel.click()
+  }
+
   return (
-    <div className="bgContent">
-      <div className="main-container">
-        <div className="row m-0 g-1">
-          <h2 className='text-center text-white mt-3'>Game Admin</h2>
-          <div className="row">
-            <div className='d-flex justify-content-center'>
+    <>
+      <div className="bgContent">
+        <div className="main-container">
+          <div className="row m-0 g-1">
+            <h2 className='text-center text-white mt-3'>Game Admin</h2>
+            <div className="row">
+              <div className='d-flex justify-content-end'>
+                <button className='btn btn-sm btn-success mb-3' onClick={() => {
+                  var gameModel = document.getElementById('model_close');
+                  gameModel.click()
+                }}>Add Game</button>
+              </div>
+              {/* <div className='d-flex justify-content-center'>
               <div className="col-md-6">
                 <Form onSubmit={handleSubmit}>
                   <Form.Group className="mb-3">
@@ -99,52 +153,11 @@ const GameAdmin = () => {
                     </Form.Control.Feedback>
                   </Form.Group>
 
-                  {/* Dynamic description fields */}
-                  {/* {newGame.descriptions.map((description, index) => (
-                    <Form.Group key={index} className="mb-3 d-flex">
-                      <Form.Control
-                        type="text"
-                        placeholder="Description"
-                        value={description}
-                        onChange={(e) => handleDescriptionChange(index, e.target.value)}
-                        isInvalid={!!errors[`description${index}`]}
-                        className="me-2"
-                      />
-                      {newGame.descriptions.length > 1 && (
-                        <Button
-                          type="button"
-                          variant="danger"
-                          onClick={() => removeDescriptionField(index)}
-                        >
-                          Remove
-                        </Button>
-                      )}
-                      <Form.Control.Feedback type="invalid">
-                        {errors[`description${index}`]}
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  ))}
-                  
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    className="mb-3"
-                    onClick={addDescriptionField}
-                  >
-                    Add Description
-                  </Button> */}
-
                   <Form.Group className="mb-3">
                     <label className="text-white">Description of game</label>
                     <CKEditor
                       editor={ClassicEditor}
                       data={newGame?.descriptions}
-                      // config={{
-                      //   ckfinder: {
-                      //     uploadUrl: "", //Enter your upload url
-                      //   },
-                      // }}
-
                       onChange={(event, editor) => {
                         const data = editor.getData();
                         setNewGame({ ...newGame, descriptions: data })
@@ -176,14 +189,65 @@ const GameAdmin = () => {
                     left: 20,
                     bottom: 80,
                     right: 20,
-                  }} // Change this position to suit your needs
+                  }}
                   reverseOrder={false} />
               </div>
+            </div> */}
+              {loading ? (
+                <div className="d-flex justify-content-center">
+                  <Spinner animation="border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </Spinner>
+                </div>
+              ) : (
+                <table class="table">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>#</th>
+                      <th>Image</th>
+                      <th>Title</th>
+                      <th className='w-25'>Link</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {games?.map((game, index) => (
+                      <tr key={game._id}>
+                        <td>{index + 1}</td>
+                        <td><img src={`${game.image}`} width={50} height={50} alt="" className='rounded' /></td>
+                        <td>{game.title}</td>
+                        <td className="text-truncate" style={{ maxWidth: '150px' }}><a href={game.link} target="_blank" rel="noopener noreferrer">{game.link}</a></td>
+                        <td>
+                          <div className='d-flex justify-content-evenly'>
+                            <button variant="warning" onClick={() => handleEdit(game)}>Edit</button>
+                            {/* <Button variant="danger" onClick={() => handleDelete(game._id)}>Delete</Button> */}
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>)}
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <button className='d-none' id="model_close" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+      <GameModel isEdit={isEdit}
+        newGame={newGame}
+        setNewGame={setNewGame}
+        handleSubmit={handleSubmit}
+        loading={loading}
+        errors={errors} />
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          style: {
+            background: '#333',
+            color: '#fff',
+          },
+        }}
+      />
+    </>
   );
 };
 

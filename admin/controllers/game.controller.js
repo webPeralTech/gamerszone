@@ -32,10 +32,18 @@ exports.createGame = async (req, res) => {
 // Update a game
 exports.updateGame = async (req, res) => {
   const { id } = req.params;
-  const { title, image, description, link } = req.body;
+  const { title, descriptions, link } = req.body;
+  
+  // Check if an image file is provided
+  let updateFields = { title, descriptions, link };
+
+  if (req.file) {
+    const image = req.file.path;
+    updateFields.image = image;  // Only add the image field if a new file is provided
+  }
 
   try {
-    const updatedGame = await Game.findByIdAndUpdate(id, { title, image, description, link }, { new: true });
+    const updatedGame = await Game.findByIdAndUpdate(id, updateFields, { new: true });
     res.json(updatedGame);
   } catch (error) {
     res.status(500).json({ message: 'Server Error' });
