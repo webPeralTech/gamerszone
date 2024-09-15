@@ -14,6 +14,7 @@ const GameDetails = ({ games }) => {
     axios.get(`${BackendUrl}/api/games/${id}`)
       .then(response => setGames(response.data))
       .catch(error => console.error(error));
+      window.scrollTo(0, 0);
   }, [id]);
 
   if (!game) {

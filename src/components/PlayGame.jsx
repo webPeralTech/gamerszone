@@ -13,6 +13,7 @@ const PlayGame = ({ games }) => {
     axios.get(`${BackendUrl}/api/games/${id}`)
       .then(response => setGame(response.data))
       .catch(error => console.error(error));
+      window.scrollTo(0, 0);
   }, [id]);
 
   if (!game) {
