@@ -20,6 +20,7 @@ const GameModel = ({ isEdit, newGame, setNewGame, handleSubmit, errors, loading 
     const modelClose = () => {
         setNewGame({
             title: '',
+            slug: '',
             image: '',
             descriptions: '',
             link: '',
@@ -68,6 +69,21 @@ const GameModel = ({ isEdit, newGame, setNewGame, handleSubmit, errors, loading 
                                         />
                                         <Form.Control.Feedback type="invalid">
                                             {errors.title}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+
+                                    <Form.Group className="mb-3">
+                                        <Form.Label htmlFor="slug" className="text-dark">Slug</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            id="slug"
+                                            placeholder="slug"
+                                            onChange={(e) => setNewGame({ ...newGame, slug: e.target.value })}
+                                            value={newGame.slug}
+                                            isInvalid={!!errors.slug}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.slug}
                                         </Form.Control.Feedback>
                                     </Form.Group>
 

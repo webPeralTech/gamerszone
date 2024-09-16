@@ -7,22 +7,32 @@ function About() {
   return (
     <>
       <div>
-        <div className="bgContent">
+        <div className="bgContent mt-5">
           <div className="main-container py-4 text-white fs-20">
-            <div className="mt-4">
-              <h4 className="descHeading"> About Game of joys </h4>
-              <p>Game of joys sounds like an exciting platform! It's great to hear that you're focused on creating a seamless gaming experience for players across various devices. The fact that your games are accessible on desktops, tablets, and mobile phones really emphasizes inclusivity and convenience for gamers everywhere.</p>
+              <section id="about-us">
+                <div class="container">
+                  <h1>About Us</h1>
+                  <p>Welcome to <strong>Game of Joys</strong> — your ultimate destination for all things gaming! At Game of Joys, we’re passionate about bringing joy and excitement to gamers of all levels, from casual players to hardcore enthusiasts. Whether you're here to explore new games, stay updated on the latest trends, or find reviews and tips, we've got you covered.</p>
 
-              <p>Offering a wide range of games that are free to play is a fantastic way to attract a diverse audience and ensure that everyone can enjoy gaming without any barriers. It's also wonderful that Game of joys supports developers from all backgrounds, fostering creativity and innovation within the gaming community.</p>
+                  <h2>Our Mission</h2>
+                  <p>At Game of Joys, our mission is simple: to create a vibrant community where gaming is more than just a hobby—it's a way of life. We aim to provide insightful content, engaging discussions, and a platform where gamers can connect, learn, and share their experiences.</p>
 
-              <p>The emphasis on instant access directly in web browsers makes gaming hassle-free and accessible on the go, which is perfect for today's fast-paced lifestyle. It sounds like Game of joys truly aims to be the ultimate playground for gamers worldwide!</p>
+                  <h2>What We Offer</h2>
+                  <ul>
+                    <li><strong>Game Reviews</strong>: Honest, in-depth reviews of the latest and greatest games.</li>
+                    <li><strong>News & Updates</strong>: Stay informed with the latest news in the gaming world.</li>
+                    <li><strong>Tips & Tricks</strong>: Improve your gameplay with expert tips and guides.</li>
+                    <li><strong>Community</strong>: Connect with like-minded gamers, share your thoughts, and join the conversation.</li>
+                  </ul>
 
-              <p>We are sure our platform will continue to grow and provide endless entertainment for gamers of all ages and preferences. Here's to creating the best browser-based gaming platform in the world!</p>
+                  <h2>Why Choose Us?</h2>
+                  <p><strong>Game of Joys</strong> is built by gamers, for gamers. We believe that gaming is not just entertainment but an experience that unites people. Our goal is to provide a platform where you can discover new joys in gaming, find your next favorite game, and join a community that celebrates the love of gaming.</p>
 
-
-            </div>
+                  <p>Thank you for visiting <strong>Game of Joys</strong>, where the joy of gaming never ends!</p>
+                </div>
+              </section>
           </div>
-          </div>
+        </div>
       </div>
     </>
   );

@@ -4,7 +4,7 @@
   min-height: calc(100vh);
   position: relative;
   z-index: 10;
-  padding-top: 5rem;
+  padding-top: 1rem;
   background-repeat: no-repeat;
   background-size: auto;
   background-attachment: fixed;
@@ -51,10 +51,11 @@
 
 section {
   width: 100%;
-  padding: 130px 0;
+  padding: 100px 0;
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
+  padding-bottom: 20px;
 }
 
 h1 {
@@ -80,4 +81,13 @@ h1 {
 .hero-section p {
   font-size: 1.2rem;
   color: white;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  section {
+    padding-bottom: 0px;
+  }
 }

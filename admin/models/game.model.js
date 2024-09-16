@@ -5,6 +5,7 @@ const gameSchema = new mongoose.Schema({
   image: { type: String, required: true },
   descriptions: { type: String, required: true },
   link: { type: String, required: true },
+  slug: { type: String, required: true },
 });
 
 module.exports = mongoose.model('Game', gameSchema);

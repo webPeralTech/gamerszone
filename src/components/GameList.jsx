@@ -21,7 +21,7 @@ const GameList = ({ games }) => {
         <div className="row m-0 g-1">
           {games?.map(game => (
             <div key={game._id} className="col-6 col-sm-4 col-lg-3 col-xl-2 p-2">
-              <div className="gameCard" onClick={() => navigate(`/game/${game._id}`)}>
+              <div className="gameCard" onClick={() => navigate(`/game/${game.slug}`)}>
                 <a >
                   <img src={game.image} alt={`Game of joys - ${game.title}`} />
                   <div className="databg"></div>

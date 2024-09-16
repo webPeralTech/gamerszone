@@ -13,13 +13,13 @@ exports.getGames = async (req, res) => {
 // Create a new game
 exports.createGame = async (req, res) => {
   try {
-    const { title, descriptions, link } = req.body;
+    const { title, slug, descriptions, link } = req.body;
     // Check if the file exists in the request
     if (!req.file) {
       return res.status(400).json({ message: 'Image is required' });
     }
     const image = req.file.path;
-    const newGame = new Game({ title, image, descriptions, link });
+    const newGame = new Game({ title, image, descriptions, link, slug });
     console.log("newGame",newGame)
     await newGame.save();
     res.status(201).json(newGame);
@@ -31,11 +31,11 @@ exports.createGame = async (req, res) => {
 
 // Update a game
 exports.updateGame = async (req, res) => {
-  const { id } = req.params;
+  const { slug } = req.params;
   const { title, descriptions, link } = req.body;
   
   // Check if an image file is provided
-  let updateFields = { title, descriptions, link };
+  let updateFields = { title, slug, descriptions, link };
 
   if (req.file) {
     const image = req.file.path;
@@ -64,10 +64,10 @@ exports.deleteGame = async (req, res) => {
 
 // Get game by ID
 exports.getGameById = async (req, res) => {
-  const { id } = req.params;
-
+  const { slug } = req.params;
+console.log("slug",slug)
   try {
-    const game = await Game.findById(id);
+    const game = await Game.findOne({slug : slug});
     if (!game) {
       return res.status(404).json({ message: 'Game not found' });
     }

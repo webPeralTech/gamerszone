@@ -1,6 +1,7 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const gameRoutes = require('./routes/game.routes');
+const userRoutes = require('./routes/user.routes');
 const cors = require('cors');
 require('dotenv').config();
 const path = require('path');
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../dist')));
 // Routes
 app.use('/api', gameRoutes);
+app.use('/api', userRoutes);
 
 
 // Fallback for all other routes

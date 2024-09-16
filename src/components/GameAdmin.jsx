@@ -11,6 +11,7 @@ const GameAdmin = () => {
   const [games, setGames] = useState([]);
   const [newGame, setNewGame] = useState({
     title: '',
+    slug: '',
     image: '',
     descriptions: '',
     link: '',
@@ -18,23 +19,32 @@ const GameAdmin = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false); // Loading state
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Authentication state
+  const [loginCredentials, setLoginCredentials] = useState({
+    email: '',
+    password: ''
+  });
+
   // Fetch all games
   useEffect(() => {
-    setLoading(true); // Show loader when fetching data
-    axios.get(`${BackendUrl}/api/games`)
-      .then(response => {
-        setGames(response.data);
-        setLoading(false); // Hide loader once data is fetched
-      })
-      .catch(error => {
-        console.error(error);
-        setLoading(false); // Hide loader if error occurs
-      });
-  }, []);
+    if (isAuthenticated) {
+      setLoading(true); // Show loader when fetching data
+      axios.get(`${BackendUrl}/api/games`)
+        .then(response => {
+          setGames(response.data);
+          setLoading(false); // Hide loader once data is fetched
+        })
+        .catch(error => {
+          console.error(error);
+          setLoading(false); // Hide loader if error occurs
+        });
+    }
+  }, [isAuthenticated]);
 
   const validateForm = () => {
     const newErrors = {};
     if (!newGame.title) newErrors.title = 'Title is required';
+    if (!newGame.slug) newErrors.slug = 'Slug is required';
     if (!newGame.image) newErrors.image = 'Image URL is required';
     if (!newGame.link) newErrors.link = 'Game Link is required';
     setErrors(newErrors);
@@ -49,6 +59,7 @@ const GameAdmin = () => {
 
       // Append each field to the FormData object
       formData.append('title', newGame?.title);
+      formData.append('slug', newGame?.slug);
       formData.append('image', newGame?.image); // Assuming `newGame.image` is a file
       formData.append('descriptions', newGame?.descriptions);
       formData.append('link', newGame?.link);
@@ -97,6 +108,7 @@ const GameAdmin = () => {
   const handleEdit = (game) => {
     setNewGame({
       title: game?.title,
+      slug: game?.slug,
       image: game?.image,
       descriptions: game?.descriptions,
       link: game?.link
@@ -107,11 +119,59 @@ const GameAdmin = () => {
     gameModel.click()
   }
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    axios.post(`${BackendUrl}/api/login`, loginCredentials).then((res) => {
+      if (res.status === 200) {
+        setIsAuthenticated(true);
+        toast.success('Login successful');
+      } else {
+        toast.error('Invalid email or password');
+      }
+    })
+  };
+
+  if (!isAuthenticated) {
+    // Show login form if not authenticated
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+        <div className="login-form" style={{ width: "50%", margin: "auto" }}>
+          <h3>Admin Login</h3>
+          <Form onSubmit={handleLogin}>
+            <Form.Group className="mb-3">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                onChange={(e) => setLoginCredentials({ ...loginCredentials, email: e.target.value })}
+                value={loginCredentials.email}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                onChange={(e) => setLoginCredentials({ ...loginCredentials, password: e.target.value })}
+                value={loginCredentials.password}
+              />
+            </Form.Group>
+
+            <Button variant="primary" type="submit">
+              Login
+            </Button>
+          </Form>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <>
       <div className="bgContent">
         <div className="main-container">
-          <div className="row m-0 g-1">
+          <div className="row m-0 g-1 mt-5">
             <h2 className='text-center text-white mt-3'>Game Admin</h2>
             <div className="row">
               <div className='d-flex justify-content-end'>
@@ -120,79 +180,6 @@ const GameAdmin = () => {
                   gameModel.click()
                 }}>Add Game</button>
               </div>
-              {/* <div className='d-flex justify-content-center'>
-              <div className="col-md-6">
-                <Form onSubmit={handleSubmit}>
-                  <Form.Group className="mb-3">
-                    <Form.Label htmlFor="title" className="text-white">Title</Form.Label>
-                    <Form.Control
-                      type="text"
-                      id="title"
-                      placeholder="Title"
-                      onChange={(e) => setNewGame({ ...newGame, title: e.target.value })}
-                      value={newGame.title}
-                      isInvalid={!!errors.title}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.title}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-
-                  <Form.Group className="mb-3">
-                    <Form.Label htmlFor="image" className="text-white">Image URL</Form.Label>
-                    <Form.Control
-                      type="file"
-                      id="image"
-                      placeholder="Image URL"
-                      onChange={(e) => setNewGame({ ...newGame, image: e.target.files[0] })}
-                      // value={newGame.image}
-                      isInvalid={!!errors.image}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.image}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-
-                  <Form.Group className="mb-3">
-                    <label className="text-white">Description of game</label>
-                    <CKEditor
-                      editor={ClassicEditor}
-                      data={newGame?.descriptions}
-                      onChange={(event, editor) => {
-                        const data = editor.getData();
-                        setNewGame({ ...newGame, descriptions: data })
-                      }}
-                    />
-                  </Form.Group>
-
-                  <Form.Group className="mb-3">
-                    <Form.Label htmlFor="link" className="text-white">Game Link</Form.Label>
-                    <Form.Control
-                      type="text"
-                      id="link"
-                      placeholder="Game Link"
-                      onChange={(e) => setNewGame({ ...newGame, link: e.target.value })}
-                      value={newGame.link}
-                      isInvalid={!!errors.link}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.link}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-
-                  <Button type="submit" variant="primary">Add Game</Button>
-                </Form>
-                <Toaster
-                  position="top-center"
-                  containerStyle={{
-                    top: 20,
-                    left: 20,
-                    bottom: 80,
-                    right: 20,
-                  }}
-                  reverseOrder={false} />
-              </div>
-            </div> */}
               {loading ? (
                 <div className="d-flex justify-content-center">
                   <Spinner animation="border" role="status">
@@ -206,6 +193,7 @@ const GameAdmin = () => {
                       <th>#</th>
                       <th>Image</th>
                       <th>Title</th>
+                      <th>Slug</th>
                       <th className='w-25'>Link</th>
                       <th>Actions</th>
                     </tr>
@@ -216,6 +204,7 @@ const GameAdmin = () => {
                         <td>{index + 1}</td>
                         <td><img src={`${game.image}`} width={50} height={50} alt="" className='rounded' /></td>
                         <td>{game.title}</td>
+                        <td>{game.slug}</td>
                         <td className="text-truncate" style={{ maxWidth: '150px' }}><a href={game.link} target="_blank" rel="noopener noreferrer">{game.link}</a></td>
                         <td>
                           <div className='d-flex justify-content-evenly'>

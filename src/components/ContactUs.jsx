@@ -10,24 +10,33 @@ function Contact() {
         <div className="bgContent">
           <div className="main-container py-4 text-white fs-20">
             <div className="my-4 pb-3">
-              <h4 className="descHeading"> Contact US </h4>
-              <p> contact@gameofjoys.com</p>
-              <p>Your satisfaction is our priority, and we are always listening to your needs to improve our services. We look forward to receiving your feedback and working with you to make your experience with "gameofjoys.com" even better. Thank you for your trust and loyalty.</p>
-              <p>Whether you want to share a suggestion, express a concern or simply chat, we’re here for you. Our dedicated customer support team is ready to help you with any questions or problems you may encounter.</p>
-            </div>
-            <div className="mt-4">
-              <h4 className="descHeading"> Copy Right Issue </h4>
-              <p> At Game of joys, we are committed to respecting intellectual property rights and have made efforts to conform with them on our platform. Some of these games were developed by us while others are licensed from known copyright holders. In some cases, there is lack of copyright information due to general internet use and thus we make sure that they comply with certain prerequisites.</p>
-              <p> No change is made in the source code of the games thereby preserving credits, brand names and website links unaltered.If you believe that your copyright or other IPR has been violated on Game of joys’ sites, please contact contact@gameofjoys.com with:</p>
-              <ul>
-                <li>Either your electronic or physical signature or that of your authorized agent.</li>
-                <li>An explanation of the infringed IP Right and the infringing activity.</li>
-                <li>The specific location of the unauthorized material (e.g., URL).</li>
-                <li>A copy of the license permitting its use (where applicable).</li>
-                <li>Identify where precisely you think this breach occurred.</li>
-                <li>Your name, contact details, and good faith belief that no permission was granted for such purposes.</li>
-              </ul>
-              <p>Send above details at contact@gameofjoys.com. We promise to examine any issues raised within seven days after they are reported.</p>
+              <section id="contact-us">
+                <div class="container">
+                  <h1>Contact Us</h1>
+                  <p>We'd love to hear from you! Whether you have questions, feedback, or just want to say hi, feel free to reach out to us. At <strong>Game of Joys</strong>, we're always here to assist you with your gaming queries and needs.</p>
+
+                  <h2>How to Reach Us</h2>
+                  <ul>
+                    <li><strong>Email:</strong> <a href="mailto:support@gameofjoys.com">support@gameofjoys.com</a></li>
+                    {/* <li><strong>Phone:</strong> +1 (123) 456-7890</li> */}
+                    <li><strong>Address:</strong> 1234 Gaming Lane, Suite 567, Game City, XY 12345</li>
+                  </ul>
+
+                  <h2>Stay Connected</h2>
+                  <p>Follow us on our social media channels to stay updated with the latest news, events, and gaming tips:</p>
+                  <ul>
+                    <li><strong>Facebook:</strong> <a href="https://www.facebook.com/gameofjoys" target="_blank">facebook.com/gameofjoys</a></li>
+                    <li><strong>Twitter:</strong> <a href="https://www.twitter.com/gameofjoys" target="_blank">twitter.com/gameofjoys</a></li>
+                    <li><strong>Instagram:</strong> <a href="https://www.instagram.com/gameofjoys" target="_blank">instagram.com/gameofjoys</a></li>
+                  </ul>
+
+                  <h2>Business Inquiries</h2>
+                  <p>For business-related inquiries, collaborations, or sponsorships, please contact us at <a href="mailto:business@gameofjoys.com">business@gameofjoys.com</a>.</p>
+
+                  <p>We look forward to hearing from you!</p>
+                </div>
+              </section>
+
             </div>
           </div>
         </div>

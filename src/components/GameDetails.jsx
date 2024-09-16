@@ -5,17 +5,17 @@ import axios from 'axios';
 import {BackendUrl} from './../utils/ApiEnd';
 
 const GameDetails = ({ games }) => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const navigate = useNavigate();
   // const game = games.find(game => game.id === id);
   const [game, setGames] = useState([]);
 
   useEffect(() => {
-    axios.get(`${BackendUrl}/api/games/${id}`)
+    axios.get(`${BackendUrl}/api/games/${slug}`)
       .then(response => setGames(response.data))
       .catch(error => console.error(error));
       window.scrollTo(0, 0);
-  }, [id]);
+  }, [slug]);
 
   if (!game) {
     return <div>Loading...</div>;
@@ -54,7 +54,7 @@ const GameDetails = ({ games }) => {
           <div className="row m-0 g-1">
             {games?.map(game => (
               <div key={game._id} className="col-6 col-sm-4 col-lg-3 col-xl-2 p-2">
-                <div className="gameCard" onClick={() => navigate(`/game/${game._id}`)}>
+                <div className="gameCard" onClick={() => navigate(`/game/${game.slug}`)}>
                   <a >
                     <img src={game.image} alt={`Game of joys - ${game.title}`} />
                     <div className="databg"></div>
