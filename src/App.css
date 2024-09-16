@@ -87,7 +87,14 @@ h1 {
   h1 {
     font-size: 2.5rem;
   }
+
   section {
     padding-bottom: 0px;
+  }
+
+  #about-us, #contact-us {
+    padding-top: 20px;
+    padding-right: 25px;
+    padding-left: 25px;
   }
 }

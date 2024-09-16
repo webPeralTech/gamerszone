@@ -5,16 +5,16 @@ import axios from 'axios';
 import { BackendUrl } from '../utils/ApiEnd';
 
 const PlayGame = ({ games }) => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [game, setGame] = React.useState(null);
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    axios.get(`${BackendUrl}/api/games/${id}`)
+    axios.get(`${BackendUrl}/api/games/${slug}`)
       .then(response => setGame(response.data))
       .catch(error => console.error(error));
       window.scrollTo(0, 0);
-  }, [id]);
+  }, [slug]);
 
   if (!game) {
     return <div>Loading...</div>;
@@ -24,7 +24,6 @@ const PlayGame = ({ games }) => {
     <>
       <div className="main-container">
         <div className="play-game-container">
-          <h1>{game.title}</h1>
           <iframe
             src={game.link} // Assuming 'link' contains the URL to play the game
             title={game.title}
@@ -40,7 +39,7 @@ const PlayGame = ({ games }) => {
           <div className="row m-0 g-1">
             {games?.map(game => (
               <div key={game?._id} className="col-6 col-sm-4 col-lg-3 col-xl-2 p-2">
-                <div className="gameCard" onClick={() => navigate(`/game/${game._id}`)}>
+                <div className="gameCard" onClick={() => navigate(`/game/${game.slug}`)}>
                   <a >
                     <img src={game.image} alt={`Game of joys - ${game.title}`} />
                     <div className="databg"></div>

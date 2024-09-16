@@ -22,7 +22,7 @@ const GameDetails = ({ games }) => {
   }
 
   const handlePlayClick = () => {
-    navigate(`/play/${id}`);
+    navigate(`/play/${slug}`);
   };
 
   return (
