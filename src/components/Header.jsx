@@ -123,18 +123,18 @@ function Header(props) {
         <Offcanvas.Header closeButton></Offcanvas.Header>
         <Offcanvas.Body>
           <div className="menu justify-content-center align-items-center">
-            <NavLink className="d-block mb-2" to="/">
+            <NavLink className="d-block mb-2" to="/" onClick={handleClose}>
               HOME
             </NavLink>
-            <NavLink className="d-block mb-2" to="/aboutus">
+            <NavLink className="d-block mb-2" to="/aboutus" onClick={handleClose}>
               ABOUT
             </NavLink>
-            <NavLink className="d-block mb-2" to="/contactus">
+            <NavLink className="d-block mb-2" to="/contactus" onClick={handleClose}>
               CONTACT
             </NavLink>
-            <NavLink className="d-block mb" to="/privacy-policy">
+            {/* <NavLink className="d-block mb" to="/privacy-policy">
               PRIVACY
-            </NavLink>
+            </NavLink> */}
           </div>
         </Offcanvas.Body>
       </Offcanvas>

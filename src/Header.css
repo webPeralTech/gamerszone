@@ -19,22 +19,22 @@
 }
 
 .menu a {
-    display: inline;
-    padding: 7px 12px;
-    margin: 0 5px;
     color: white;
     text-decoration: none;
+    padding: 7px 12px;
+    display: inline;
+    margin: 0 5px;
     transition: 0.5s;
     border-radius: 5px;
 }
 
 .menu a:hover {
-    background: linear-gradient(180deg, rgb(46 210 214), rgb(228 27 238));
+    background: linear-gradient(165deg, rgb(72 57 101), rgb(175 105 205));
     color: white;
 }
 
 .menu a.active {
-    background: linear-gradient(180deg, rgb(46 210 214), rgb(228 27 238));
+    background: linear-gradient(165deg, rgb(72 57 101), rgb(175 105 205));
     color: white;
 }
 

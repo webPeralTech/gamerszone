@@ -2,15 +2,51 @@
 <html lang="en">
 
 <head>
+  <!-- Meta Tags -->
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="./src/assets/games_zone.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Game Of Joys</title>
+  <meta name="description" content="Game Of Joys - The ultimate platform for gaming enthusiasts, featuring the latest games, news, and reviews." />
+  <meta name="keywords" content="games, online gaming, Game Of Joys, gaming news, game reviews, play games" />
+  <meta name="author" content="Game Of Joys" />
+  <meta property="og:title" content="Game Of Joys - Ultimate Gaming Platform" />
+  <meta property="og:description" content="Stay updated with the latest games, gaming news, and reviews on Game Of Joys." />
+  <meta property="og:image" content="/src/assets/games_zone.png" />
+  <meta property="og:url" content="https://www.gameofjoys.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:type" content="website" />
+
+ <!-- Title and Favicon -->
+  <title>Game Of Joys - Ultimate Gaming Platform</title>
+  <link rel="icon" type="image/png" href="/src/assets/games_zone.png" />
+
+  <!-- Google Fonts (Optional) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://www.gameofjoys.com/" />
+
+  <!-- Structured Data for SEO (JSON-LD for Gaming Website) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Game Of Joys",
+    "url": "https://www.gameofjoys.com",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.gameofjoys.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
 </head>
 
 <body>
   <div id="root"></div>
-  <!-- Google tag (gtag.js) -->
+
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FQVVX5D5X1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -19,6 +55,8 @@
 
     gtag('config', 'G-FQVVX5D5X1');
   </script>
+  
+  <!-- Main Application Script -->
   <script type="module" src="/src/main.jsx"></script>
 </body>
 
