@@ -200,12 +200,12 @@ const GameAdmin = () => {
                   </thead>
                   <tbody>
                     {games?.map((game, index) => (
-                      <tr key={game._id}>
+                      <tr key={game?._id}>
                         <td>{index + 1}</td>
-                        <td><img src={`${game.image}`} width={50} height={50} alt="" className='rounded' /></td>
-                        <td>{game.title}</td>
-                        <td>{game.slug}</td>
-                        <td className="text-truncate" style={{ maxWidth: '150px' }}><a href={game.link} target="_blank" rel="noopener noreferrer">{game.link}</a></td>
+                        <td><img src={`${game?.image}`} width={50} height={50} alt="" className='rounded' /></td>
+                        <td>{game?.title}</td>
+                        <td>{game?.slug}</td>
+                        <td className="text-truncate" style={{ maxWidth: '150px' }}><a href={game?.link} target="_blank" rel="noopener noreferrer">{game?.link}</a></td>
                         <td>
                           <div className='d-flex justify-content-evenly'>
                             <button variant="warning" onClick={() => handleEdit(game)}>Edit</button>
