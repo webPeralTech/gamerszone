@@ -17,7 +17,7 @@ function Contact() {
 
                   <h2>How to Reach Us</h2>
                   <ul>
-                    <li><strong>Email:</strong> <a href="mailto:support@gameofjoys.com">support@gameofjoys.com</a></li>
+                    <li><strong>Email:</strong> <a href="mailto:getinfo.gameofjoys@gmail.com">getinfo.gameofjoys@gmail.com</a></li>
                     {/* <li><strong>Phone:</strong> +1 (123) 456-7890</li> */}
                     <li><strong>Address:</strong> 1234 Gaming Lane, Suite 567, Game City, XY 12345</li>
                   </ul>
@@ -31,7 +31,7 @@ function Contact() {
                   </ul>
 
                   <h2>Business Inquiries</h2>
-                  <p>For business-related inquiries, collaborations, or sponsorships, please contact us at <a href="mailto:business@gameofjoys.com">business@gameofjoys.com</a>.</p>
+                  <p>For business-related inquiries, collaborations, or sponsorships, please contact us at <a href="mailto:getinfo.gameofjoys@gmail.com">business@gameofjoys.com</a>.</p>
 
                   <p>We look forward to hearing from you!</p>
                 </div>
