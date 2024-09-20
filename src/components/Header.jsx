@@ -39,7 +39,7 @@
 
 import React, { useState } from "react";
 import "./../Header.css";
-import logo from "./../assets/games_zone.png"
+import logo from "./../assets/New_Logo.png"
 import { Link, NavLink } from "react-router-dom";
 import { Offcanvas } from "react-bootstrap";
 // import { useCookies } from "react-cookie";
@@ -69,16 +69,16 @@ function Header(props) {
       <div className="header">
         <div className="main-container">
           <div className="row m-0">
-            <div className="col-lg-4 col-10">
+            <div className="col-lg-4 col-10 mt-2">
               <a href="/">
                 <div className="d-flex">
-                  <img src={logo} alt="" height={80} />
-                  <h6 className="text-center d-flex align-items-center text-white fs-4 mb-3">Game Of Joys</h6>
+                  <img src={logo} alt="" height={45} />
+                  {/* <h6 className="text-center d-flex align-items-center text-white fs-4 mb-3">Game Of Joys</h6> */}
                 </div>
 
               </a>
             </div>
-            <div className="col-lg-7 col-2 d-flex justify-content-end align-items-center ">
+            <div className="col-lg-7 col-2 d-flex justify-content-end align-items-center " style={{marginTop: "10px"}}>
               <div className="mb-3 menu justify-content-end align-items-center d-md-flex d-none">
 
                

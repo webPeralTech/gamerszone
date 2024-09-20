@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './../../src/Footer.css';
 import axios from 'axios';
-import logo from "./../assets/games_zone.png"
+import logo from "./../assets/new_Logo.png"
 import { BackendUrl } from '../utils/ApiEnd';
 
 function Footer({ games }) {
@@ -20,12 +20,12 @@ function Footer({ games }) {
     <div className='footer'>
       <div className='main-container h-100'>
         <div className='row m-0 h-100 d-flex py-3'>
-          <div className='col-12 col-md-2'>
-            <img src={logo} alt="Game of joys" width={'200px'} height={'200px'} style={{ maxWidth: '500px' }} />
+          <div className='col-12 col-md-2 text-center'>
+            <img src={logo} alt="Game of joys" height={60} style={{marginTop : "40px"}}/>
           </div>
 
-          <div className='col-10 d-flex flex-wrap gap-5 footerLinks '>
-            <div className="d-flex flex-column mt-5">
+          <div className='col-10 d-flex flex-wrap gap-5 footerLinks mt-4'>
+            <div className="d-flex flex-column mt-2">
               <h6>Navigate</h6>
               <div className='menuLinks mt-3'>
                 <a href="/">Home</a>
@@ -33,7 +33,7 @@ function Footer({ games }) {
                 <a href="/contactus">Contact Us</a>
               </div>
             </div>
-            <div className="d-flex flex-column mt-5">
+            <div className="d-flex flex-column mt-2">
               <h6 className='d-block text-start w-100'>Games</h6>
               <div className='menuLinks mt-3 d-flex gap-4'>
                 <div>
