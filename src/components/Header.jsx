@@ -40,7 +40,7 @@
 import React, { useState } from "react";
 import "./../Header.css";
 import logo from "./../assets/New_Logo.png"
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Offcanvas } from "react-bootstrap";
 // import { useCookies } from "react-cookie";
 import { useEffect } from "react";
@@ -50,10 +50,13 @@ function Header(props) {
   // const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const navigate = useNavigate();
 
   const logout = () => {
-    removeCookie('user')
+    document.cookie = `gameOfJoys=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    navigate(`/`);
   }
+
   useEffect(() => {
     if (props.name) {
       window.gtag("event", "page", {
@@ -63,6 +66,18 @@ function Header(props) {
     }
   }, [])
 
+  const getCookie = (name) => {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') c = c.substring(1);
+      if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  };
+
+  const alreadyLoggedIn = getCookie("gameOfJoys");
 
   return (
     <>
@@ -78,23 +93,23 @@ function Header(props) {
 
               </a>
             </div>
-            <div className="col-lg-7 col-2 d-flex justify-content-end align-items-center " style={{marginTop: "10px"}}>
+            <div className="col-lg-7 col-2 d-flex justify-content-end align-items-center " style={{ marginTop: "10px" }}>
               <div className="mb-3 menu justify-content-end align-items-center d-md-flex d-none">
 
-               
-                  <>  
+
+                <>
                   <NavLink to="/">HOME</NavLink>
-                    <span onClick={() => window.location.reload()} ><NavLink to="/aboutus">ABOUT US</NavLink></span>
-                    <span onClick={() => window.location.reload()} ><NavLink to="/contactus">CONTACT US</NavLink></span>
-                    </>
-                
+                  <span onClick={() => window.location.reload()} ><NavLink to="/aboutus">ABOUT US</NavLink></span>
+                  <span onClick={() => window.location.reload()} ><NavLink to="/contactus">CONTACT US</NavLink></span>
+                </>
+
 
               </div>
-              {/* {
-                cookies.user && <div>
-                  <button onClick={logout} style={{ padding: '5px 15px' }}>Logout</button>
+              {
+                alreadyLoggedIn && <div>
+                  <button onClick={logout} className="mb-3 menu justify-content-end align-items-center d-md-flex d-none">Logout</button>
                 </div>
-              } */}
+              }
               <div
                 className="d-flex d-md-none justify-content-end align-items-center h-100"
                 style={{ cursor: "pointer" }}

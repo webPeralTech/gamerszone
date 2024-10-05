@@ -27,6 +27,11 @@ const GameAdmin = () => {
 
   // Fetch all games
   useEffect(() => {
+    const alreadyLoggedIn = getCookie("gameOfJoys");
+    if (alreadyLoggedIn) {
+      setIsAuthenticated(true);
+    }
+
     if (isAuthenticated) {
       setLoading(true); // Show loader when fetching data
       axios.get(`${BackendUrl}/api/games`)
@@ -49,6 +54,27 @@ const GameAdmin = () => {
     if (!newGame.link) newErrors.link = 'Game Link is required';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
+  };
+
+
+  // Helper function to set a cookie by name
+  const setCookie = (name, value, days) => {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + date.toUTCString();
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+  };
+
+  // Helper function to get a cookie by name
+  const getCookie = (name) => {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') c = c.substring(1);
+      if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
   };
 
   const handleSubmit = (e) => {
@@ -121,14 +147,21 @@ const GameAdmin = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    axios.post(`${BackendUrl}/api/login`, loginCredentials).then((res) => {
-      if (res.status === 200) {
-        setIsAuthenticated(true);
-        toast.success('Login successful');
-      } else {
-        toast.error('Invalid email or password');
-      }
-    })
+    // axios.post(`${BackendUrl}/api/login`, loginCredentials).then((res) => {
+    //   if (res.status === 200) {
+    //     setIsAuthenticated(true);
+    //     toast.success('Login successful');
+    //   } else {
+    //     toast.error('Invalid email or password');
+    //   }
+    // })
+    if (loginCredentials?.email === "info.gameofjoys@gmail.com" && loginCredentials?.password === "g@mekAZaman@123") {
+      setIsAuthenticated(true);
+      setCookie("gameOfJoys", "YEBb88839#@#77266263BHBSHbeuicb__#445434", 2);
+      toast.success('Login successful');
+    } else {
+      toast.error('Invalid email or password');
+    }
   };
 
   if (!isAuthenticated) {
